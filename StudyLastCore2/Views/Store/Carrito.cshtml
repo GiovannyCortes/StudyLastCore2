@@ -1,0 +1,79 @@
+﻿@model IEnumerable<StudyLastCore2.Models.Item>
+
+@{
+    ViewData["Title"] = "Carrito";
+    int cantidadItem = ViewBag.CANTIDAD;
+}
+
+<h1>Carrito</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdItem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                <div>
+                    <input type="number" min="0" max="30" value="@cantidadItem" name="cantidadItem" />
+                    <button class="increment-amount" data-item-id="@cantidadItem">+</button>
+                    <button class="decrement-amount" data-item-id="@cantidadItem">-</button>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<script>
+    $(function () {
+        $(".increment-amount").on("click", function () {
+            var itemId = $(this).data("item-id");
+            var input = $(this).siblings("input");
+            var value = parseInt(input.val()) || 0;
+            input.val(value + 1);
+            // Aquí puedes hacer una llamada AJAX al servidor para actualizar la cantidad del elemento con el ID especificado.
+        });
+        $(".decrement-amount").on("click", function () {
+            var itemId = $(this).data("item-id");
+            var input = $(this).siblings("input");
+            var value = parseInt(input.val()) || 0;
+            input.val(value - 1);
+            // Aquí puedes hacer una llamada AJAX al servidor para actualizar la cantidad del elemento con el ID especificado.
+        });
+    });
+</script>

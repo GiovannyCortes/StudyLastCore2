@@ -10,9 +10,8 @@ namespace StudyLastCore2.Helpers  {
             this.helperPath = pathProvider;
         }
 
-        public async Task<string> UploadFileAsync(IFormFile file, Folders folder) {
-            string fileName = file.FileName;
-            string path = this.helperPath.MapPath(fileName, folder);
+        public async Task<string> UploadFileAsync(IFormFile file, Folders folder, string filename) {
+            string path = this.helperPath.MapPath(filename, folder);
             using (Stream stream = new FileStream(path, FileMode.Create)) {
                 await file.CopyToAsync(stream);
             }

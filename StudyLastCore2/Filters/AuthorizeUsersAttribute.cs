@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace StudyLastCore.Filters {
+namespace StudyLastCore2.Filters {
     public class AuthorizeUsersAttribute : AuthorizeAttribute, IAuthorizationFilter {
 
         public void OnAuthorization(AuthorizationFilterContext context) {

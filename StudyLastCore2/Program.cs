@@ -5,6 +5,7 @@ using StudyLastCore2.Helpers;
 using StudyLastCore2.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddMemoryCache();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options => {

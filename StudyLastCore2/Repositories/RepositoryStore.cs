@@ -12,6 +12,10 @@ namespace StudyLastCore2.Repositories {
             this.context = context;
         }
 
+        public async Task<Item> FindItemAsync(int idproducto) {
+            return await this.context.Items.FirstOrDefaultAsync(i => i.IdItem == idproducto);
+        }
+
         public async Task RegisterUserAsync(string username, string password) {
             var newid = this.context.Users.Any() ? this.context.Users.Max(u => u.IdUser) + 1 : 1;
             User user = new User();
@@ -63,6 +67,17 @@ namespace StudyLastCore2.Repositories {
             return itemsPaginados;
         }
 
-        
+        public async Task<int> InsertItem(string name, string description, int amount) {
+            var newid = this.context.Items.Any() ? this.context.Items.Max(u => u.IdItem) + 1 : 1;
+            Item item = new Item {
+                IdItem = newid,
+                Name = name,
+                Description = description,
+                Amount = amount,
+                Image = "image_" + newid
+            };
+            return newid;
+        }
+
     }
 }

@@ -3,16 +3,15 @@
 @{
     ViewData["Title"] = "Index";
     int registros = (int)ViewData["REGISTROS"];
-    int cnt = 0;
+    int cnt = 1;
 }
 
 <h1>Index</h1>
 
 @for(int i = 0; i < registros; i += 3) {
-    <a asp-controller="Store" asp-action="Index" asp-route-posicion="@i">@(cnt++)</a>
+    <a class="btn btn-outline-info" asp-controller="Store" asp-action="Index" asp-route-posicion="@i">@(cnt++)</a>
 }
 
-<img src="https://www.lavanguardia.com/files/article_main_microformat/uploads/2022/03/20/62370c9317199.png" />
 <table class="table">
     <thead>
         <tr>
@@ -50,12 +49,15 @@
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Image)
+                <img src="~/images/@item.Image" width="200"/>
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a asp-controller="Store" asp-action="AgregarCarrito">
+                    <img src="https://mobiliarioshunfa.com/20073-large_default/carro-de-supermercado-mediano-80l-855297cm.jpg" style="widht: 50px; height: 50px"/>
+                </a>
+                @Html.ActionLink("GUARDAR EN CARRITO", "AgregarCarrito", new { idProduct = @item.IdItem }) |
+                @Html.ActionLink("EDITAR", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("ELIMINAR", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

@@ -18,6 +18,12 @@ builder.Services.AddAuthentication(options => {
     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 }).AddCookie();
 
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("NUESTROSPERMISOS",
+        policy => policy.RequireRole("admin")
+    );
+});
+
 builder.Services.AddControllersWithViews();
 string connectionString = builder.Configuration.GetConnectionString("StoreConnection");
 

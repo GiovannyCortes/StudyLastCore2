@@ -74,8 +74,10 @@ namespace StudyLastCore2.Repositories {
                 Name = name,
                 Description = description,
                 Amount = amount,
-                Image = "image_" + newid
+                Image = "image_" + newid + ".jpg"
             };
+            this.context.Items.Add(item);
+            await this.context.SaveChangesAsync();
             return newid;
         }
 

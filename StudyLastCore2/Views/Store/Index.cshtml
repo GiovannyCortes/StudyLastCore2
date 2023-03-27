@@ -52,10 +52,12 @@
                 <img src="~/images/@item.Image" width="200"/>
             </td>
             <td>
-                <a asp-controller="Store" asp-action="AgregarCarrito">
+                 <a asp-controller="Store" asp-action="AgregarCarrito" asp-route-idProduct="@item.IdItem">
                     <img src="https://mobiliarioshunfa.com/20073-large_default/carro-de-supermercado-mediano-80l-855297cm.jpg" style="widht: 50px; height: 50px"/>
                 </a>
-                @Html.ActionLink("GUARDAR EN CARRITO", "AgregarCarrito", new { idProduct = @item.IdItem }) |
+                <a asp-controller="Store" asp-action="AddFavorito" asp-route-idProduct="@item.IdItem">
+                    Add favorite
+                </a>
                 @Html.ActionLink("EDITAR", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("ELIMINAR", "Delete", new { /* id=item.PrimaryKey */ })
             </td>

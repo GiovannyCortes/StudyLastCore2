@@ -51,9 +51,8 @@ namespace StudyLastCore2.Controllers {
         public IActionResult Register() {
             return View();
         }
-
-        [ValidateAntiForgeryToken]
-        [HttpPost]
+        
+        [HttpPost] [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(string name, string password) {
             await this.repo.RegisterUserAsync(name, password);
             return RedirectToAction("Login");

@@ -8,25 +8,9 @@ namespace StudyLastCore2.Repositories {
 
         private StoreContext context;
 
-        public RepositoryStore(StoreContext context)
-        {
+        public RepositoryStore(StoreContext context) {
             this.context = context;
         }
-
-        /*
-            
-            Repository
-
-            List<Items> GetAllProducts()
-            List<Items> GetProducts(int posicion)
-
-            Task<int> InsertUserAsync(string name, string password, string salt, string role) "Ya tiene dentro el get nexid"
-            Task<int> InsertItem(string name, string descripction, int amount, string image) "Ya tiene dentro el get nexid"
-
-            Task<int> InsertOrder(int idUser, datetime dateOrder) "Se inserta la orden y se recupera el nuevo ID para realizar las posteriores insercciones de items"
-            Task InsertItemOrder(int idOrder, int idItem, int amount) 
-
-        */
 
         public async Task RegisterUserAsync(string username, string password) {
             var newid = this.context.Users.Any() ? this.context.Users.Max(u => u.IdUser) + 1 : 1;
@@ -36,6 +20,7 @@ namespace StudyLastCore2.Repositories {
             user.Role = "cliente";
             user.Salt = HelperCryptography.GenerateSalt();
             user.Password = HelperCryptography.EncryptPassword(password, user.Salt);
+            //User.AQUISILOVES = password
 
             this.context.Users.Add(user);
             await this.context.SaveChangesAsync();
@@ -43,7 +28,7 @@ namespace StudyLastCore2.Repositories {
 
         public async Task<User> LoginUserAsync (string username, string password) {
             User user = await this.context.Users.FirstOrDefaultAsync(u => u.Name == username);
-            if(user == null) {
+            if (user == null) {
                 return null;
             } else {
                 byte[] passUsuario = user.Password;

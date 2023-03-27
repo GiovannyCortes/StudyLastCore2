@@ -1,0 +1,64 @@
+﻿@model List<Item>
+
+@{
+    ViewData["Title"] = "Index";
+    int registros = (int)ViewData["REGISTROS"];
+    int cnt = 0;
+}
+
+<h1>Index</h1>
+
+@for(int i = 0; i < registros; i += 3) {
+    <a asp-controller="Store" asp-action="Index" asp-route-posicion="@i">@(cnt++)</a>
+}
+
+<img src="https://www.lavanguardia.com/files/article_main_microformat/uploads/2022/03/20/62370c9317199.png" />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                IdItem
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Image
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
